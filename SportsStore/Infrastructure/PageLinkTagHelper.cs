@@ -23,13 +23,13 @@ public class PageLinkTagHelper : TagHelper
 
     public string? PageAction { get; set; }
 
-    private bool PageClassesEnabled { get; set; } = false;
+    public bool PageClassesEnabled { get; set; } = false;
 
-    private string PageClass { get; set; } = string.Empty;
+    public string PageClass { get; set; } = string.Empty;
 
-    private string PageClassNormal { get; set; } = string.Empty;
+    public string PageClassNormal { get; set; } = string.Empty;
 
-    private string PageClassSelected { get; set; } = string.Empty;
+    public string PageClassSelected { get; set; } = string.Empty;
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
@@ -37,11 +37,17 @@ public class PageLinkTagHelper : TagHelper
 
         var urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
         var result = new TagBuilder("div");
+
         for (var i = 1; i <= PageModel.TotalPages; i++)
         {
-            var tag = new TagBuilder("a");
-            tag.Attributes["href"] = urlHelper.Action(PageAction,
-                new { productPage = i });
+            var tag = new TagBuilder("a")
+            {
+                Attributes =
+                {
+                    ["href"] = urlHelper.Action(PageAction, new  { productPage = i })
+                }
+            };
+
             if (PageClassesEnabled)
             {
                 tag.AddCssClass(PageClass);
