@@ -6,8 +6,8 @@ namespace SportsStore.Controllers;
 
 public class HomeController : Controller
 {
-    public int PageSize = 4;
     private readonly IStoreRepository _repository;
+    public int PageSize = 4;
 
     public HomeController(IStoreRepository repo)
     {
@@ -19,7 +19,7 @@ public class HomeController : Controller
         var model = new ProductsListViewModel
         {
             Products = _repository.Products
-                .Where(p => category == null || p.Category == category)
+                .Where(p => string.IsNullOrEmpty(category) || p.Category == category)
                 .OrderBy(p => p.ProductId)
                 .Skip((productPage - 1) * PageSize)
                 .Take(PageSize),
@@ -27,9 +27,11 @@ public class HomeController : Controller
             {
                 CurrentPage = productPage,
                 ItemsPerPage = PageSize,
-                TotalItems = _repository.Products.Count()
+                TotalItems = string.IsNullOrEmpty(category)
+                    ? _repository.Products.Count()
+                    : _repository.Products.Count(e => e.Category == category)
             },
-            CurrentCategory = category     
+            CurrentCategory = category
         };
         return View(model);
     }
