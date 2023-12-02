@@ -30,7 +30,7 @@ public class PageLinkTagHelper : TagHelper
     public string? PageAction { get; set; }
 
     [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
-    public Dictionary<string, object> PageUrlValues { get; set; } = new();
+    private Dictionary<string, object> PageUrlValues { get; set; } = new();
 
     public bool PageClassesEnabled { get; set; } = false;
 
