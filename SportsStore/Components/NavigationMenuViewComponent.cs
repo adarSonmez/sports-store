@@ -3,6 +3,7 @@ using SportsStore.Models;
 
 namespace SportsStore.Components;
 
+// View component providing data for the navigation menu.
 public class NavigationMenuViewComponent : ViewComponent
 {
     private IStoreRepository _repository;
@@ -12,9 +13,13 @@ public class NavigationMenuViewComponent : ViewComponent
         _repository = repo;
     }
 
+    // Method invoked when rendering the view component.
     public IViewComponentResult Invoke()
     {
+        // Set the selected category in the ViewBag for use in the view.
         ViewBag.SelectedCategory = RouteData.Values["category"] ?? string.Empty;
+
+        // Retrieve and return a sorted list of distinct product categories.
         return View(
             _repository.Products
                 .Select(x => x.Category)

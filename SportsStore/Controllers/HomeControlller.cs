@@ -14,6 +14,7 @@ public class HomeController : Controller
         _repository = repo;
     }
 
+    // Action method for rendering the product list with pagination.
     public ViewResult Index(string? category, int productPage = 1)
     {
         var model = new ProductsListViewModel
@@ -33,6 +34,8 @@ public class HomeController : Controller
             },
             CurrentCategory = category
         };
+        
+        // Render the view with the organized product data.
         return View(model);
     }
 }

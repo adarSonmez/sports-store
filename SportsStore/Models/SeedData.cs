@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SportsStore.Models;
 
+// Static class for seeding initial data into the database.
 public static class SeedData
 {
+    // Ensures that the database is populated with initial data.
     public static void EnsurePopulated(IApplicationBuilder app)
     {
         var context = app.ApplicationServices
@@ -14,6 +16,7 @@ public static class SeedData
 
         if (context.Products.Any()) return;
 
+        // Seed the database with initial product data.
         context.Products.AddRange(
             new Product
             {
@@ -69,6 +72,8 @@ public static class SeedData
                 Category = "Chess", Price = 1200
             }
         );
+
+        // Save changes to persist the seeded data in the database.
         context.SaveChanges();
     }
 }

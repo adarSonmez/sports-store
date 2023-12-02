@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportsStore.Models;
 
+// Model class representing a product in the application.
 public class Product
 {
     public long? ProductId { get; set; }
