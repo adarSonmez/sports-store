@@ -1,18 +1,17 @@
-namespace SportsStore.Models
+namespace SportsStore.Models;
+
+// Entity Framework-based implementation of the IStoreRepository interface.
+public class EfStoreRepository : IStoreRepository
 {
-    // Entity Framework-based implementation of the IStoreRepository interface.
-    public class EfStoreRepository : IStoreRepository
+    // Database context for accessing the underlying database.
+    private readonly StoreDbContext _context;
+
+    // Constructor to inject the StoreDbContext dependency.
+    public EfStoreRepository(StoreDbContext ctx)
     {
-        // Database context for accessing the underlying database.
-        private readonly StoreDbContext _context;
-
-        // Constructor to inject the StoreDbContext dependency.
-        public EfStoreRepository(StoreDbContext ctx)
-        {
-            _context = ctx;
-        }
-
-        // Queryable collection of products provided by the Entity Framework context.
-        public IQueryable<Product> Products => _context.Products;
+        _context = ctx;
     }
+
+    // Queryable collection of products provided by the Entity Framework context.
+    public IQueryable<Product> Products => _context.Products;
 }

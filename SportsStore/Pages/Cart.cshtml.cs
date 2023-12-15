@@ -1,46 +1,49 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SportsStore.Infrastructure;
 using SportsStore.Models;
 
-namespace SportsStore.Pages;
-
-// Razor Pages model for managing the shopping cart.
-public class CartModel : PageModel
+namespace SportsStore.Pages
 {
-    private IStoreRepository _repository;
-
-    public CartModel(IStoreRepository repo)
+    // CartModel class represents the Razor Page model for managing the shopping cart.
+    public class CartModel : PageModel
     {
-        _repository = repo;
-    }
+        private IStoreRepository _repository;
 
-    public Cart? Cart { get; set; }
-    public string ReturnUrl { get; set; } = "/";
+        // Constructor to initialize the model with a repository and the Cart service.
+        public CartModel(IStoreRepository repo, Cart cartService)
+        {
+            _repository = repo;
+            Cart = cartService;
+        }
 
-    // Handler method for handling HTTP GET requests.
-    public void OnGet(string? returnUrl)
-    {
-        // Set the return URL and retrieve the cart data from the session.
-        ReturnUrl = returnUrl ?? "/";
-        Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-    }
+        public Cart Cart { get; set; }
 
-    // Handler method for handling HTTP POST requests when adding items to the cart.
-    public IActionResult OnPost(long productId, string returnUrl)
-    {
-        // Retrieve the product based on the provided productId.
-        var product = _repository.Products
-            .FirstOrDefault(p => p.ProductId == productId);
+        public string ReturnUrl { get; set; } = "/";
 
-        if (product == null) return RedirectToPage(new { returnUrl });
+        // Handler for the HTTP GET request to the Cart page, allowing specification of a return URL.
+        public void OnGet(string? returnUrl)
+        {
+            ReturnUrl = returnUrl ?? "/";
+        }
 
-        // If the product exists, update the cart and store it in the session.
-        Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-        Cart.AddItem(product, 1);
-        HttpContext.Session.SetJson("cart", Cart);
+        // Handler for the HTTP POST request to add a product to the cart.
+        public IActionResult OnPost(long productId, string returnUrl)
+        {
+            var product = _repository.Products
+                .FirstOrDefault(p => p.ProductId == productId);
 
-        // Redirect to the specified return URL.
-        return RedirectToPage(new { returnUrl });
+            if (product != null) Cart.AddItem(product, 1);
+
+            return RedirectToPage(new { returnUrl });
+        }
+
+        // Handler for the HTTP POST request to remove a product from the cart.
+        public IActionResult OnPostRemove(long productId, string returnUrl)
+        {
+            Cart.RemoveLine(Cart.Lines.First(cl =>
+                cl.Product.ProductId == productId).Product);
+
+            return RedirectToPage(new { returnUrl });
+        }
     }
 }

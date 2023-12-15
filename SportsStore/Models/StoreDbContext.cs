@@ -12,4 +12,7 @@ public class StoreDbContext : DbContext
 
     // DbSet representing the collection of Product entities in the database.
     public DbSet<Product> Products => Set<Product>();
+
+    // DbSet representing the collection of Order entities in the database.
+    public DbSet<Order> Orders => Set<Order>();
 }

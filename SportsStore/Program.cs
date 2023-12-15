@@ -17,6 +17,9 @@ builder.Services.AddDbContext<StoreDbContext>(opts =>
 // Registers the EfStoreRepository class as the service that will be used to satisfy requests for IStoreRepository objects.
 builder.Services.AddScoped<IStoreRepository, EfStoreRepository>();
 
+// Registers the EfOrderRepository class as the service that will be used to satisfy requests for IOrderRepository objects.
+builder.Services.AddScoped<IOrderRepository, EfOrderRepository>();
+
 // Adds Razor Pages services to the application, enabling the use of dynamic web pages with embedded C# code (Razor syntax).
 builder.Services.AddRazorPages();
 
@@ -25,6 +28,13 @@ builder.Services.AddDistributedMemoryCache();
 
 // Registers the session service, configuring it to use the distributed memory cache for storing session information.
 builder.Services.AddSession();
+
+// Registers the Cart class as a scoped service, indicating that a new instance will be created for each scope (typically per request). 
+// The service provider will use the provided lambda expression to instantiate Cart objects, utilizing the SessionCart class through the GetCart method.
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp)); 
+
+// Registers the HttpContextAccessor class as a singleton service, indicating that a single instance will be created for the lifetime of the application.
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
