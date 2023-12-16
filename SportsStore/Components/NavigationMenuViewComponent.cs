@@ -17,7 +17,7 @@ public class NavigationMenuViewComponent : ViewComponent
     public IViewComponentResult Invoke()
     {
         // Set the selected category in the ViewBag for use in the view.
-        ViewBag.SelectedCategory = RouteData.Values["category"] ?? string.Empty;
+        ViewBag.SelectedCategory = RouteData?.Values["category"] ?? string.Empty;
 
         // Retrieve and return a sorted list of distinct product categories.
         return View(
