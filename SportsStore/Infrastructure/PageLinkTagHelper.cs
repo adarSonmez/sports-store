@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using SportsStore.Models.ViewModels;
-using System.Collections.Generic;
 
 namespace SportsStore.Infrastructure;
 
@@ -20,9 +19,8 @@ public class PageLinkTagHelper : TagHelper
         _urlHelperFactory = helperFactory;
     }
 
-    // Properties to be set in the Razor view for configuring the Tag Helper.
-    [ViewContext]
-    [HtmlAttributeNotBound]
+    [ViewContext] // Indicates that the property should be set to the ViewContext object for the current request.
+    [HtmlAttributeNotBound] // Indicates that the property should not be included in the Tag Helper's output.
     public ViewContext? ViewContext { get; set; }
 
     public PagingInfo? PageModel { get; set; }
@@ -30,7 +28,7 @@ public class PageLinkTagHelper : TagHelper
     public string? PageAction { get; set; }
 
     [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
-    private Dictionary<string, object> PageUrlValues { get; set; } = new();
+    public Dictionary<string, object> PageUrlValues { get; set; } = new();
 
     public bool PageClassesEnabled { get; set; } = false;
 
@@ -43,7 +41,6 @@ public class PageLinkTagHelper : TagHelper
     // Process method to generate the HTML for pagination links.
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
-        // Check if necessary data is available.
         if (ViewContext == null || PageModel == null) return;
 
         // Get the URL helper.

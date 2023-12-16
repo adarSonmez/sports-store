@@ -23,15 +23,17 @@
                 @((line.Quantity * line.Product.Price).ToString("c"))
             </td>
             <td class="text-center">
+                <!-- Form for removing a product from the shopping cart. The form handles the "Remove" page handler. -->
                 <form asp-page-handler="Remove" method="post">
-                    <input type="hidden" name="ProductId"
-                           value="@line.Product.ProductId"/>
-                    <input type="hidden" name="returnUrl"
-                           value="@Model?.ReturnUrl"/>
+                    <!-- Hidden input to store the product ID of the line being removed. -->
+                    <input type="hidden" name="ProductId" value="@line.Product.ProductId"/>
+                    <!-- Hidden input to store the return URL. -->
+                    <input type="hidden" name="returnUrl" value="@Model?.ReturnUrl"/>
                     <button type="submit" class="btn btn-sm btn-danger">
                         Remove
                     </button>
                 </form>
+
             </td>
         </tr>
     }
