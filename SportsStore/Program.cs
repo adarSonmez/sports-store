@@ -24,14 +24,14 @@ builder.Services.AddScoped<IOrderRepository, EfOrderRepository>();
 builder.Services.AddRazorPages();
 
 // Registers the distributed memory cache service, enabling efficient storage of session data in-memory.
-builder.Services.AddDistributedMemoryCache(); 
+builder.Services.AddDistributedMemoryCache();
 
 // Registers the session service, configuring it to use the distributed memory cache for storing session information.
 builder.Services.AddSession();
 
 // Registers the Cart class as a scoped service, indicating that a new instance will be created for each scope (typically per request). 
 // The service provider will use the provided lambda expression to instantiate Cart objects, utilizing the SessionCart class through the GetCart method.
-builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp)); 
+builder.Services.AddScoped(SessionCart.GetCart);
 
 // Registers the HttpContextAccessor class as a singleton service, indicating that a single instance will be created for the lifetime of the application.
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -41,31 +41,18 @@ var app = builder.Build();
 // Enables serving static files (e.g., CSS, JavaScript, images) to clients, allowing access to resources in the 'wwwroot' folder.
 app.UseStaticFiles();
 
-app.MapControllerRoute(
-    "pagination",
-    "Products/Page{productPage:int:min(1)}",
-    new { Controller = "Home", action = "Index", productPage = 1 }
-);
+app.MapControllerRoute("category-page",
+    "{category}/Page{productPage:int}",
+    new { Controller = "Home", action = "Index" });
 
-app.MapControllerRoute(
-    "category-page",
-    "{category:exists}/Page{productPage:int:min(1)}",
-    new { Controller = "Home", action = "Index" }
-);
+app.MapControllerRoute("category", "{category}",
+    new { Controller = "Home", action = "Index", productPage = 1 });
 
-app.MapControllerRoute(
-    "page",
-    "Page{productPage:int:min(1)}",
-    new { Controller = "Home", action = "Index", productPage = 1 }
-);
+app.MapControllerRoute("pagination",
+    "Products/Page{productPage}",
+    new { Controller = "Home", action = "Index", productPage = 1 });
 
-app.MapControllerRoute(
-    "category", 
-    "{category}",
-    new { Controller = "Home", action = "Index", productPage = 1 }
-);
-
-// Maps the default controller route, providing a default route for MVC controllers.
+// Maps the default controller route, providing a default route for MVC controllers. (/Controller/Action/Id)
 app.MapDefaultControllerRoute();
 
 // Maps Razor Pages, allowing the application to respond to Razor Page requests.

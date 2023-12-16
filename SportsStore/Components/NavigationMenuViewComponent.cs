@@ -6,7 +6,7 @@ namespace SportsStore.Components;
 // View component providing data for the navigation menu.
 public class NavigationMenuViewComponent : ViewComponent
 {
-    private IStoreRepository _repository;
+    private readonly IStoreRepository _repository;
 
     public NavigationMenuViewComponent(IStoreRepository repo)
     {

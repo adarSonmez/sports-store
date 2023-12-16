@@ -5,7 +5,7 @@ public class Cart
 {
     public List<CartLine> Lines { get; set; } = new();
 
-    public virtual void AddItem(Product product, int quantity)
+    public virtual void AddItem(Product product, int quantity = 1)
     {
         var line = Lines.FirstOrDefault(p => p.Product.ProductId == product.ProductId);
 
@@ -28,7 +28,7 @@ public class Cart
     {
         return Lines.Sum(e => e.Product.Price * e.Quantity);
     }
-    
+
     public virtual void Clear()
     {
         Lines.Clear();

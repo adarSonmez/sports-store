@@ -34,6 +34,7 @@ namespace SportsStore.Pages
 
             if (product != null) Cart.AddItem(product, 1);
 
+            // Redirect to the current URL with specified route values.
             return RedirectToPage(new { returnUrl });
         }
 
