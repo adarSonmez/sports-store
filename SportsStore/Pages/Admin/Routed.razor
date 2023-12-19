@@ -1,0 +1,14 @@
+<!-- Router component responsible for handling route navigation in the Blazor application. -->
+<Router AppAssembly="typeof(Program).Assembly">
+    <!-- Found: Renders the RouteView component when a matching route is found. -->
+    <Found>
+        <RouteView RouteData="@context" DefaultLayout="typeof(AdminLayout)" />
+    </Found>
+    
+    <!-- NotFound: Renders a message when no matching route is found. -->
+    <NotFound>
+        <h4 class="bg-danger text-white text-center p-2">
+            No Matching Route Found
+        </h4>
+    </NotFound>
+</Router>

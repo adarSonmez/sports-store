@@ -36,6 +36,9 @@ builder.Services.AddScoped(SessionCart.GetCart);
 // Registers the HttpContextAccessor class as a singleton service, indicating that a single instance will be created for the lifetime of the application.
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+// Configures and adds Server-Side Blazor services to the DI container.
+builder.Services.AddServerSideBlazor();
+
 var app = builder.Build();
 
 // Enables serving static files (e.g., CSS, JavaScript, images) to clients, allowing access to resources in the 'wwwroot' folder.
@@ -57,6 +60,14 @@ app.MapDefaultControllerRoute();
 
 // Maps Razor Pages, allowing the application to respond to Razor Page requests.
 app.MapRazorPages();
+
+// Map the Blazor Hub endpoint to enable real-time communication between the server and Blazor components.
+app.MapBlazorHub();
+
+// MapFallbackToPage is used to specify a fallback page for certain routes.
+// In this case, any URL starting with "/admin/" will fall back to the "/Admin/Index" page.
+app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
+
 
 // Enables session support in the application, allowing the storage and retrieval of user-specific data during the user's session.
 app.UseSession();
