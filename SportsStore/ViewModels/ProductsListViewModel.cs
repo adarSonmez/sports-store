@@ -1,4 +1,6 @@
-namespace SportsStore.Models.ViewModels;
+using SportsStore.Models;
+
+namespace SportsStore.ViewModels;
 
 // View model class representing data for displaying a list of products in a view.
 public class ProductsListViewModel

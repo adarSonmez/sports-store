@@ -1,4 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SportsStore.Data.Context;
+using SportsStore.Data.Repositories.Abstract;
+using SportsStore.Data.Repositories.Concrete;
+using SportsStore.Data.Seed;
 using SportsStore.Models;
 
 // Creates a new web application builder, providing a convenient entry point for configuring and building an ASP.NET web application.
@@ -67,7 +71,6 @@ app.MapBlazorHub();
 // MapFallbackToPage is used to specify a fallback page for certain routes.
 // In this case, any URL starting with "/admin/" will fall back to the "/Admin/Index" page.
 app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
-
 
 // Enables session support in the application, allowing the storage and retrieval of user-specific data during the user's session.
 app.UseSession();

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SportsStore.Data.Repositories.Abstract;
 using SportsStore.Models;
 
 namespace SportsStore.Pages

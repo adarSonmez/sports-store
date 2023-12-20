@@ -1,4 +1,6 @@
-namespace SportsStore.Models;
+using SportsStore.Models;
+
+namespace SportsStore.Data.Repositories.Abstract;
 
 // Interface defining the contract for a repository that provides access to a collection of products.
 public interface IStoreRepository

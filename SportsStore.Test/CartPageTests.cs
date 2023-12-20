@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using Moq;
+using SportsStore.Data.Repositories.Abstract;
 using SportsStore.Models;
 using SportsStore.Pages;
 using Xunit;

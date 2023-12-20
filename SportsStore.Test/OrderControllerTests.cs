@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SportsStore.Controllers;
+using SportsStore.Data.Repositories.Abstract;
 using SportsStore.Models;
 using Xunit;
 

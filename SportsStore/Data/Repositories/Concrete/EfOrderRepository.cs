@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using SportsStore.Data.Context;
+using SportsStore.Data.Repositories.Abstract;
+using SportsStore.Models;
 
-namespace SportsStore.Models;
+namespace SportsStore.Data.Repositories.Concrete;
 
 // Entity Framework-based implementation of the IOrderRepository interface.
 public class EfOrderRepository : IOrderRepository

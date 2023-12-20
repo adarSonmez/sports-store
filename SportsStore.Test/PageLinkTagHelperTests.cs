@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Moq;
 using SportsStore.Infrastructure;
-using SportsStore.Models.ViewModels;
+using SportsStore.ViewModels;
 using Xunit;
 
 namespace SportsStore.Test;

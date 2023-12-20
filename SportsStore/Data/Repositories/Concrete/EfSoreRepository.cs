@@ -1,4 +1,8 @@
-namespace SportsStore.Models;
+using SportsStore.Data.Context;
+using SportsStore.Data.Repositories.Abstract;
+using SportsStore.Models;
+
+namespace SportsStore.Data.Repositories.Concrete;
 
 // Entity Framework-based implementation of the IStoreRepository interface.
 public class EfStoreRepository : IStoreRepository

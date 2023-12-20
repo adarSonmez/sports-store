@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SportsStore.Data.Context;
+using SportsStore.Models;
 
-namespace SportsStore.Models;
+namespace SportsStore.Data.Seed;
 
 // Static class for seeding initial data into the database.
 public static class SeedData

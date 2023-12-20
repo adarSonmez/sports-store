@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using SportsStore.Data.Repositories.Abstract;
 using SportsStore.Models;
-using SportsStore.Models.ViewModels;
+using SportsStore.ViewModels;
 
 namespace SportsStore.Controllers;
 

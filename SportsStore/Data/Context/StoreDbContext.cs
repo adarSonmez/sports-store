@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using SportsStore.Models;
 
-namespace SportsStore.Models;
+namespace SportsStore.Data.Context;
 
 // Database context class for interacting with the underlying database.
 public class StoreDbContext : DbContext

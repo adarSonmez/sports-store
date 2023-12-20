@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Routing;
 using Moq;
 using SportsStore.Components;
+using SportsStore.Data.Repositories.Abstract;
 using SportsStore.Models;
 using Xunit;
 
