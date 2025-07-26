@@ -1,6 +1,6 @@
 # SportsStore Solution
 
-This repository contains the source code for the **SportsStore** application, as featured in the book [Pro ASP.NET Core 6](https://www.apress.com/book/9781484279567) by Adam Freeman.
+This repository contains the source code for the **SportsStore** application, as featured in the book "Pro ASP.NET Core 6" by Adam Freeman.
 
 ## Overview
 
